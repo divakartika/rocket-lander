@@ -365,16 +365,16 @@ class RocketLander(gym.Env):
         #           - 100 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
         #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
         #           + 0 * state[6] + 0 * state[7]
-        #var0.4
-        shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-                  - 0 * np.sqrt(np.square(state[2]) + np.square(state[3])) \
-                  - 0 * abs(state[4]) - 0 * abs(state[5]) \
-                  + 0 * state[6] + 0 * state[7]
-        # #var0.5
+        # #var0.4
         # shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 1000 * abs(state[4]) - 0 * abs(state[5]) \
+        #           - 0 * np.sqrt(np.square(state[2]) + np.square(state[3])) \
+        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
         #           + 0 * state[6] + 0 * state[7]
+        #var0.5
+        shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
+                  - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
+                  - 1000 * abs(state[4]) - 0 * abs(state[5]) \
+                  + 0 * state[6] + 0 * state[7]
         # #var0.6
         # shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
         #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
