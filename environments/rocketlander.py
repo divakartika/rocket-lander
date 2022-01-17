@@ -345,17 +345,32 @@ class RocketLander(gym.Env):
     # ['dx','dy','x_vel','y_vel','theta','theta_dot','left_ground_contact','right_ground_contact']
     def __compute_rewards(self, state, main_engine_power, side_engine_power, part_angle):
         reward = 0
-        #default
+        # #default
+        # shaping = -200 * np.sqrt(np.square(state[0]) + np.square(state[1])) \
+        #           - 100 * np.sqrt(np.square(state[2]) + np.square(state[3])) \
+        #           - 1000 * abs(state[4]) - 30 * abs(state[5]) \
+        #           + 20 * state[6] + 20 * state[7]
+        #default1.2
+        shaping = -200 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
+                  - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
+                  - 0 * abs(state[4]) - 0 * abs(state[5]) \
+                  + 0 * state[6] + 0 * state[7]
+        # #default
+        # shaping = -200 * np.sqrt(np.square(state[0]) + np.square(state[1])) \
+        #           - 100 * np.sqrt(np.square(state[2]) + np.square(state[3])) \
+        #           - 1000 * abs(state[4]) - 30 * abs(state[5]) \
+        #           + 20 * state[6] + 20 * state[7]
+        # #default
         # shaping = -200 * np.sqrt(np.square(state[0]) + np.square(state[1])) \
         #           - 100 * np.sqrt(np.square(state[2]) + np.square(state[3])) \
         #           - 1000 * abs(state[4]) - 30 * abs(state[5]) \
         #           + 20 * state[6] + 20 * state[7]
 
-        #var1.1: 0.1 state[0]
-        shaping = -0.1 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-                  - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-                  - 0 * abs(state[4]) - 0 * abs(state[5]) \
-                  + 0 * state[6] + 0 * state[7]
+        # #var1.1: 0.1 state[0]
+        # shaping = -0.1 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
+        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
+        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
+        #           + 0 * state[6] + 0 * state[7]
         # #var1.2: 1 state[0]
         # shaping = -1 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
         #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
