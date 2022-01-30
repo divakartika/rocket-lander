@@ -375,11 +375,11 @@ class RocketLander(gym.Env):
         #           - 100 * np.sqrt(0 * np.square(state[2]) + np.square(state[3])) \
         #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
         #           + 0 * state[6] + 0 * state[7]
-        #var0.4.1
-        shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-                  + 100 * np.sqrt(0 * np.square(state[2]) + np.square(state[3])) \
-                  - 0 * abs(state[4]) - 0 * abs(state[5]) \
-                  + 0 * state[6] + 0 * state[7]
+        # #var0.4.1
+        # shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
+        #           + 100 * np.sqrt(0 * np.square(state[2]) + np.square(state[3])) \
+        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
+        #           + 0 * state[6] + 0 * state[7]
         # #var0.5
         # shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
         #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
@@ -401,213 +401,11 @@ class RocketLander(gym.Env):
         #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
         #           + 0 * state[6] + 20 * state[7]
 
-        # #var1.1: 0.1 state[0]
-        # shaping = -0.1 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var1.2: 1 state[0]
-        # shaping = -1 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var1.3: 10 state[0]
-        # shaping = -10 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var1.4: 100 state[0]
-        # shaping = -100 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var1.5: 1000 state[0]
-        # shaping = -1000 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-
-        # #var2.1: 0.1 state[1]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0.1 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var2.2: 1 state[1]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 1 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var2.3: 10 state[1]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 10 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var2.4: 100 state[1]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 100 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var2.5: 1000 state[1]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 1000 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-
-        # #var3.1: 0.1 state[2]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0.1 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var3.2: 1 state[2]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 1 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var3.3: 10 state[2]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 10 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var3.4: 100 state[2]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 100 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var3.5: 1000 state[2]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 1000 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-
-        # #var4.1: 0.1 state[3]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0.1 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var4.2: 1 state[3]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 1 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var4.3: 10 state[3]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 10 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var4.4: 100 state[3]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 100 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var4.5: 1000 state[3]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 1000 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-
-        # #var5.1: 0.1 state[4]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0.1 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var5.2: 1 state[4]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 1 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var5.3: 10 state[4]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 10 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var5.4: 100 state[4]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 100 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var5.5: 1000 state[4]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 1000 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-
-        # #var6.1: 0.1 state[5]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0.1 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var6.2: 1 state[5]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 1 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var6.3: 10 state[5]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 10 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var6.4: 100 state[5]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 100 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var6.5: 1000 state[5]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 1000 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-
-        # #var7.1: 0.1 state[6]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0.1 * state[6] + 0 * state[7]
-        # #var7.2: 1 state[6]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 1 * state[6] + 0 * state[7]
-        # #var7.3: 10 state[6]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 10 * state[6] + 0 * state[7]
-        # #var7.4: 100 state[6]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 100 * state[6] + 0 * state[7]
-        # #var7.5: 1000 state[6]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 1000 * state[6] + 0 * state[7]
-
-        # #var8.1: 0.1 state[7]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0.1 * state[7]
-        # #var8.2: 1 state[7]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 1 * state[7]
-        # #var8.3: 10 state[7]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 10 * state[7]
-        # #var8.4: 100 state[7]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 100 * state[7]
-        # #var8.5: 1000 state[7]
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 1000 * state[7]
+        #var1.0: all states ON with state[1] and state[3] negative
+        shaping = - 200 * np.sqrt(np.square(state[0]) - np.square(state[1])) \
+                  - 100 * np.sqrt(np.square(state[2]) - np.square(state[3])) \
+                  - 1000 * abs(state[4]) - 30 * abs(state[5]) \
+                  + 20 * state[6] + 20 * state[7]
 
         # Introduce the concept of options by making reference markers wrt altitude and speed
         # if (state[4] < 0.052 and state[4] > -0.052):
