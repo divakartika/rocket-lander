@@ -405,7 +405,7 @@ class RocketLander(gym.Env):
         shaping = - 200 * np.sqrt(np.square(state[0]) - np.square(state[1])) \
                   - 100 * np.sqrt(np.square(state[2]) - np.square(state[3])) \
                   - 1000 * abs(state[4]) - 30 * abs(state[5]) \
-                  + 20 * state[6] + 20 * state[7]
+                #   + 20 * state[6] + 20 * state[7]
 
         # Introduce the concept of options by making reference markers wrt altitude and speed
         # if (state[4] < 0.052 and state[4] > -0.052):
