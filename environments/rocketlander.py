@@ -402,8 +402,8 @@ class RocketLander(gym.Env):
         #           + 0 * state[6] + 20 * state[7]
 
         #var1.0: all states ON with state[1] and state[3] negative
-        shaping = - 200 * np.sqrt(np.square(state[0]) - np.square(state[1])) \
-                  - 100 * np.sqrt(np.square(state[2]) + np.square(state[3])) \
+        shaping = #- 200 * np.sqrt(np.square(state[0]) - np.square(state[1])) \
+                  #- 100 * np.sqrt(np.square(state[2]) + np.square(state[3])) \
                   - 1000 * abs(state[4]) - 30 * abs(state[5]) \
                   + 20 * state[6] + 20 * state[7]
 
