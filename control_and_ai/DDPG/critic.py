@@ -99,7 +99,5 @@ class Critic():
             fc2 = layer(fc1, 300, activation=tf.sigmoid)
         with tf.variable_scope(name + '_fc_3'):
             fc3 = layer(fc2, 1, is_output=True)
-        
-        print(fc3)
 
         return fc3
