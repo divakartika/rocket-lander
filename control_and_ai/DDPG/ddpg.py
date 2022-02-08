@@ -57,8 +57,6 @@ class DDPG():
 
         self.sess = tf.Session() 
 
-        print(batch_size)
-
         self.experience_buffer = ExperienceBuffer(buffer_size)
         self.batch_size = batch_size
         self.actor = Actor(self.sess, action_space_bounds, exploration_policies, env_space_size, actor_learning_rate, optimizer=tf.train.AdamOptimizer)
