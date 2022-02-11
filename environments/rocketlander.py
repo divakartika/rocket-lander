@@ -406,11 +406,11 @@ class RocketLander(gym.Env):
         #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
         #           + 0 * state[6] + 0 * state[7]        
 
-        #var1.0
-        shaping = - 200 * np.sqrt(abs(state[0]) + np.square(state[1])) \
-                  - 100 * np.sqrt(abs(state[2]) + np.square(state[3])) \
-                  - 1000 * abs(state[4]) - 30 * abs(state[5]) \
-                  + 20 * state[6] + 20 * state[7]
+        # #var1.0
+        # shaping = - 200 * np.sqrt(abs(state[0]) + np.square(state[1])) \
+        #           - 100 * np.sqrt(abs(state[2]) + np.square(state[3])) \
+        #           - 1000 * abs(state[4]) - 30 * abs(state[5]) \
+        #           + 20 * state[6] + 20 * state[7]
         # #var1.1
         # shaping = - 200 * np.sqrt(abs(state[0])/10 + np.square(state[1])) \
         #           - 100 * np.sqrt(abs(state[2])/10 + np.square(state[3])) \
@@ -421,6 +421,12 @@ class RocketLander(gym.Env):
         #           - 100 * np.sqrt(abs(state[2])/100 + np.square(state[3])) \
         #           - 1000 * abs(state[4]) - 30 * abs(state[5]) \
         #           + 20 * state[6] + 20 * state[7]
+        #var1.3
+        shaping = - 200 * np.sqrt(abs(state[0])/100 + np.square(state[1])) \
+                  - 100 * np.sqrt(abs(state[2])/10 + np.square(state[3])) \
+                  - 1000 * abs(state[4]) - 30 * abs(state[5]) \
+                  + 20 * state[6] + 20 * state[7]
+
 
         # Introduce the concept of options by making reference markers wrt altitude and speed
         # if (state[4] < 0.052 and state[4] > -0.052):
