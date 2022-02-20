@@ -448,9 +448,22 @@ class RocketLander(gym.Env):
         self.prev_shaping = shaping
 
         # penalize the use of engines
-        reward += -main_engine_power * 0.3
+        # reward += -main_engine_power * 0.3
+        # if self.settings['Side Engines']:
+        #     reward += -side_engine_power * 0.3
+
+        # reward += -main_engine_power * 0
+        # if self.settings['Side Engines']:
+        #     reward += -side_engine_power * 0.3
+
+        # reward += -main_engine_power * 0.3
+        # if self.settings['Side Engines']:
+        #     reward += -side_engine_power * 0
+
+        reward += -main_engine_power * 0
         if self.settings['Side Engines']:
-            reward += -side_engine_power * 0.3
+            reward += -side_engine_power * 0
+
         # if self.settings['Vectorized Nozzle']:
         #     reward += -100*np.abs(nozzle_angle) # Psi
 
