@@ -345,88 +345,17 @@ class RocketLander(gym.Env):
     # ['dx','dy','x_vel','y_vel','theta','theta_dot','left_ground_contact','right_ground_contact']
     def __compute_rewards(self, state, main_engine_power, side_engine_power, part_angle):
         reward = 0
+        genes = [0,0,0,0,0,0,0,0,0,0]
         # #default
         # shaping = - 200 * np.sqrt(np.square(state[0]) + np.square(state[1])) \
         #           - 100 * np.sqrt(np.square(state[2]) + np.square(state[3])) \
         #           - 1000 * abs(state[4]) - 30 * abs(state[5]) \
         #           + 20 * state[6] + 20 * state[7]
-        # #var0.1
-        # shaping = -200 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var0.2
-        # shaping = - 200 * np.sqrt(0 * np.square(state[0]) + np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var0.2.1
-        # shaping = 200 * np.sqrt(0 * np.square(state[0]) + np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0 * np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var0.3
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 100 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var0.4
-        # shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 100 * np.sqrt(0 * np.square(state[2]) + np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var0.4.1
-        # shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           + 100 * np.sqrt(0 * np.square(state[2]) + np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        #var0.5
-        # shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 1000 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var0.6
-        # shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 30 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]
-        # #var0.7
-        # shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 20 * state[6] + 0 * state[7]
-        # #var0.8
-        # shaping = -0 * np.sqrt(np.square(state[0]) + 0 * np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + 0* np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 20 * state[7]
-        # #var0.9
-        # shaping = - 0 * np.sqrt(np.square(state[0]) + np.square(state[1])) \
-        #           - 0 * np.sqrt(np.square(state[2]) + np.square(state[3])) \
-        #           - 0 * abs(state[4]) - 0 * abs(state[5]) \
-        #           + 0 * state[6] + 0 * state[7]        
 
-        # #var1.0
-        # shaping = - 200 * np.sqrt(abs(state[0]) + np.square(state[1])) \
-        #           - 100 * np.sqrt(abs(state[2]) + np.square(state[3])) \
-        #           - 1000 * abs(state[4]) - 30 * abs(state[5]) \
-        #           + 20 * state[6] + 20 * state[7]
-        # #var1.1
-        # shaping = - 200 * np.sqrt(abs(state[0])/10 + np.square(state[1])) \
-        #           - 100 * np.sqrt(abs(state[2])/10 + np.square(state[3])) \
-        #           - 1000 * abs(state[4]) - 30 * abs(state[5]) \
-        #           + 20 * state[6] + 20 * state[7]
-        # #var1.2
-        # shaping = - 200 * np.sqrt(abs(state[0])/100 + np.square(state[1])) \
-        #           - 100 * np.sqrt(abs(state[2])/100 + np.square(state[3])) \
-        #           - 1000 * abs(state[4]) - 30 * abs(state[5]) \
-        #           + 20 * state[6] + 20 * state[7]
-        #var1.3
-        shaping = - 200 * np.sqrt(abs(state[0])/100 + np.square(state[1])) \
-                  - 100 * np.sqrt(abs(state[2])/10 + np.square(state[3])) \
-                  - 1000 * abs(state[4]) - 30 * abs(state[5]) \
-                  + 20 * state[6] + 20 * state[7]
-
+        shaping = - 200 * np.sqrt(genes[0] * np.square(state[0]) + genes[1] * np.square(state[1])) \
+                  - 100 * np.sqrt(genes[2] * np.square(state[2]) + genes[3] * np.square(state[3])) \
+                  - 1000 * abs(genes[4] * state[4]) - 30 * abs(genes[5] * state[5]) \
+                  + 20 * (genes[6] * state[6]) + 20 * (genes[7] * state[7])
 
         # Introduce the concept of options by making reference markers wrt altitude and speed
         # if (state[4] < 0.052 and state[4] > -0.052):
@@ -452,17 +381,9 @@ class RocketLander(gym.Env):
         # if self.settings['Side Engines']:
         #     reward += -side_engine_power * 0.3
 
-        # reward += -main_engine_power * 0
-        # if self.settings['Side Engines']:
-        #     reward += -side_engine_power * 0.3
-
-        # reward += -main_engine_power * 0.3
-        # if self.settings['Side Engines']:
-        #     reward += -side_engine_power * 0
-
-        reward += -main_engine_power * 0
+        reward += -main_engine_power * 0.3 * genes[8]
         if self.settings['Side Engines']:
-            reward += -side_engine_power * 0
+            reward += -side_engine_power * 0.3 * genes[9]
 
         # if self.settings['Vectorized Nozzle']:
         #     reward += -100*np.abs(nozzle_angle) # Psi
