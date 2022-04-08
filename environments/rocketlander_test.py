@@ -197,7 +197,7 @@ class RocketLander(gym.Env):
         self.state = state  # Keep a record of the new state
 
         # Rewards for reinforcement learning
-        reward = self.__compute_rewards(state, m_power, s_power,
+        reward, reward_element = self.__compute_rewards(state, m_power, s_power,
                                         part.angle)  # part angle can be used as part of the reward
 
         # Check if the game is done, adjust reward based on the final state of the body
@@ -216,7 +216,7 @@ class RocketLander(gym.Env):
 
         self._update_particles()
 
-        return np.array(state), reward, done, {}  # {} = info (required by parent class)
+        return np.array(state), reward, reward_element, done, {}  # {} = info (required by parent class)
 
     """ PROBLEM SPECIFIC - PHYSICS, STATES, REWARDS"""
 
@@ -350,6 +350,20 @@ class RocketLander(gym.Env):
                   - 1000 * abs(state[4]) - 30 * abs(state[5]) \
                   + 20 * state[6] + 20 * state[7]
 
+        reward_pos = -200 * np.sqrt(np.square(state[0]) + np.square(state[1]))
+        reward_vel = - 100 * np.sqrt(np.square(state[2]) + np.square(state[3]))
+        reward_ang = - 1000 * abs(state[4])
+        reward_angvel =  - 30 * abs(state[5])
+        reward_leftleg = + 20 * state[6]
+        reward_rightleg = + 20 * state[7]
+
+        reward_element = [reward_pos/10,
+                          reward_vel/10,
+                          reward_ang/10,
+                          reward_angvel/10,
+                          reward_leftleg/10,
+                          reward_rightleg/10]
+
         # Introduce the concept of options by making reference markers wrt altitude and speed
         # if (state[4] < 0.052 and state[4] > -0.052):
         #     for i, (pos, speed, flag) in enumerate(zip(self.y_pos_ref, self.y_pos_speed, self.y_pos_flags)):
@@ -376,7 +390,7 @@ class RocketLander(gym.Env):
         # if self.settings['Vectorized Nozzle']:
         #     reward += -100*np.abs(nozzle_angle) # Psi
 
-        return reward / 10
+        return reward / 10, reward_element
 
     """ PROBLEM SPECIFIC - RENDERING and OBJECT CREATION"""
 
@@ -962,7 +976,7 @@ def get_state_sample(samples, normal_state=True, untransformed_state=True):
         f_side = np.random.uniform(-1, 1)
         psi = np.random.uniform(-90 * DEGTORAD, 90 * DEGTORAD)
         action = [f_main, f_side, psi]
-        s, r, done, info = env.step(action)
+        s, r, re, done, info = env.step(action)
         if normal_state:
             state_samples.append(s)
         else:
