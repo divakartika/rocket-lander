@@ -197,7 +197,7 @@ class RocketLander(gym.Env):
         self.state = state  # Keep a record of the new state
 
         # Rewards for reinforcement learning
-        reward, reward_element = self.__compute_rewards(state, m_power, s_power,
+        reward, shaping_element = self.__compute_rewards(state, m_power, s_power,
                                         part.angle)  # part angle can be used as part of the reward
 
         # Check if the game is done, adjust reward based on the final state of the body
@@ -210,13 +210,15 @@ class RocketLander(gym.Env):
         if any(state_reset_conditions):
             done = True
             reward = -10
+            print('reward if any(state_reset_conditon) =', reward)
         if not self.lander.awake:
             done = True
             reward = +10
+            print("reward if not awake =", )
 
         self._update_particles()
 
-        return np.array(state), reward, reward_element, done, {}  # {} = info (required by parent class)
+        return np.array(state), reward, shaping_element, done, {}  # {} = info (required by parent class)
 
     """ PROBLEM SPECIFIC - PHYSICS, STATES, REWARDS"""
 
@@ -350,12 +352,12 @@ class RocketLander(gym.Env):
                   - 1000 * abs(state[4]) - 30 * abs(state[5]) \
                   + 20 * state[6] + 20 * state[7]
 
-        reward_pos = -200 * np.sqrt(np.square(state[0]) + np.square(state[1]))
-        reward_vel = - 100 * np.sqrt(np.square(state[2]) + np.square(state[3]))
-        reward_ang = - 1000 * abs(state[4])
-        reward_angvel =  - 30 * abs(state[5])
-        reward_leftleg = + 20 * state[6]
-        reward_rightleg = + 20 * state[7]
+        shaping_pos = -200 * np.sqrt(np.square(state[0]) + np.square(state[1]))
+        shaping_vel = - 100 * np.sqrt(np.square(state[2]) + np.square(state[3]))
+        shaping_ang = - 1000 * abs(state[4])
+        shaping_angvel =  - 30 * abs(state[5])
+        shaping_leftleg = + 20 * state[6]
+        shaping_rightleg = + 20 * state[7]
 
         # Introduce the concept of options by making reference markers wrt altitude and speed
         # if (state[4] < 0.052 and state[4] > -0.052):
@@ -384,19 +386,20 @@ class RocketLander(gym.Env):
         # if self.settings['Vectorized Nozzle']:
         #     reward += -100*np.abs(nozzle_angle) # Psi
 
-        reward_fe = -main_engine_power * 0.3
-        reward_fs = -side_engine_power * 0.3
+        shaping_fe = -main_engine_power * 0.3
+        shaping_fs = -side_engine_power * 0.3
 
-        reward_element = [reward_pos/10,
-                          reward_vel/10,
-                          reward_ang/10,
-                          reward_angvel/10,
-                          reward_leftleg/10,
-                          reward_rightleg/10,
-                          reward_fe/10,
-                          reward_fs/10]
+        shaping_element = [shaping_pos/10,
+                          shaping_vel/10,
+                          shaping_ang/10,
+                          shaping_angvel/10,
+                          shaping_leftleg/10,
+                          shaping_rightleg/10,
+                          shaping_fe/10,
+                          shaping_fs/10]
 
-        return reward / 10, reward_element
+        print('reward/10 =', reward/10)
+        return reward / 10, shaping_element
 
     """ PROBLEM SPECIFIC - RENDERING and OBJECT CREATION"""
 
