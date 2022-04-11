@@ -217,7 +217,8 @@ class RocketLander(gym.Env):
             print("reward if not awake =", )
 
         self._update_particles()
-
+        print('reward in _step()', reward)
+        print('\n')
         return np.array(state), reward, shaping_element, done, {}  # {} = info (required by parent class)
 
     """ PROBLEM SPECIFIC - PHYSICS, STATES, REWARDS"""
