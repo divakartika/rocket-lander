@@ -210,15 +210,15 @@ class RocketLander(gym.Env):
         if any(state_reset_conditions):
             done = True
             reward = -10
-            print('reward if any(state_reset_conditon) =', reward)
+            # print('reward if any(state_reset_conditon) =', reward)
         if not self.lander.awake:
             done = True
             reward = +10
-            print("reward if not awake =", )
+            # print("reward if not awake =", )
 
         self._update_particles()
-        print('reward in _step()', reward)
-        print('\n')
+        # print('reward in _step()', reward)
+        # print('\n')
         return np.array(state), reward, shaping_element, done, {}  # {} = info (required by parent class)
 
     """ PROBLEM SPECIFIC - PHYSICS, STATES, REWARDS"""
@@ -377,7 +377,7 @@ class RocketLander(gym.Env):
 
         if self.prev_shaping is not None:
             reward = shaping - self.prev_shaping
-            print('shaping-prev_shaping =', reward)
+            # print('shaping-prev_shaping =', reward)
         self.prev_shaping = shaping
 
         # penalize the use of engines
@@ -399,7 +399,7 @@ class RocketLander(gym.Env):
                           shaping_fe/10,
                           shaping_fs/10]
 
-        print('reward/10 =', reward/10)
+        # print('reward/10 =', reward/10)
         return reward / 10, shaping_element
 
     """ PROBLEM SPECIFIC - RENDERING and OBJECT CREATION"""
