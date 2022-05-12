@@ -23,7 +23,7 @@ import numpy as np
 #
 # plt.show()
 
-action_history = np.load('')
+action_history = np.load('C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//evaluation_scripts//mpc//planned_actions_1.npy')
 res = Graphing(plot_colors=['royalblue','darkorange','limegreen'], fig_size=(9,5))
 fig = res.create_figure()
 
