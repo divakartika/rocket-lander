@@ -223,7 +223,7 @@ def calculate_stats_percentages(action_history, psi_degree_threshold=3):
 ''' Evaluation Functions '''
 # PID
 def evaluate_pid():
-    file_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//evaluation_scripts//pid'
+    file_path = ''
 
     env = RocketLander(simulation_settings)
     pid_controller = PID_Controller()
@@ -237,10 +237,10 @@ def evaluate_pid():
 
 # Low Discretization Q-Learning
 def evaluate_low_discretization_q_learning_function_approximation():
-    file_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//evaluation_scripts//rl_q_learning//low_discretization'
+    file_path = ''
 
-    load_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//function_approximation_rl' \
-                '//rl_linear_function_approximation_low_function_discretization_trained_at_once.p'
+    load_path = '' \
+                ''
 
     env = RocketLander(simulation_settings)
     controller = Q_Learning_Controller(load_path=load_path, low_discretization=True,
@@ -255,10 +255,9 @@ def evaluate_low_discretization_q_learning_function_approximation():
 
 # High Discretization Q-Learning
 def evaluate_high_discretization_q_learning_function_approximation():
-    file_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//evaluation_scripts//rl_q_learning//high_discretization'
+    file_path = ''
 
-    load_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//function_approximation_rl' \
-                '//rl_linear_function_approximation_high_function_discretization_trained_at_once.p'
+    load_path = ''
 
     env = RocketLander(simulation_settings)
     controller = Q_Learning_Controller(load_path=load_path, low_discretization=False,
@@ -274,10 +273,9 @@ def evaluate_high_discretization_q_learning_function_approximation():
 #rl_linear_function_approximation_high_function_discretization_5000_episodes_trained_at_once
 # High Discretization Q-Learning
 def evaluate_high_discretization_q_learning_function_approximation_longer_state():
-    file_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//evaluation_scripts//rl_q_learning//high_discretization_longer_state'
+    file_path = ''
 
-    load_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//function_approximation_rl' \
-                '//rl_linear_function_approximation_high_function_discretization_5000_episodes_trained_at_once.p'
+    load_path = ''
 
     env = RocketLander(simulation_settings)
     controller = Q_Learning_Controller_Longer_State(load_path=load_path, low_discretization=False,
@@ -294,9 +292,9 @@ def evaluate_high_discretization_q_learning_function_approximation_longer_state(
 def evaluate_normalized_normal_state_ddpg():
     # Model 1
     # Fuel Cost = 0, Max Steps = 500, Episode Training = 2000, RANDOM FORCE = 20000, RANDOM X_FORCE = 0.2*RANDOM FORCE
-    load_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//DDPG//model_normal_state'
+    load_path = ''
     
-    file_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//DDPG//model_normal_state'
+    file_path = ''
 
     normal_state_FLAG = True
     untransformed_state_FLAG = False
@@ -318,9 +316,9 @@ def evaluate_normalized_normal_state_ddpg():
 
 # Model 2 - Unormalized state = [x,z,x_dot,z_dot,theta,theta_dot,fuel,mass,barge left edge coordinates,barge right edge coordinates, landing coordinates]
 def evaluate_unnormalized_longer_state_ddpg():
-    load_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//DDPG//model_2_longer_unnormalized_state'
+    load_path = ''
 
-    file_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//evaluation_scripts//ddpg//model_2_unnormalized_longer_state'
+    file_path = ''
 
     normal_state_FLAG = False
     untransformed_state_FLAG = False
@@ -342,7 +340,7 @@ def evaluate_unnormalized_longer_state_ddpg():
 
 # MPC
 def evaluate_MPC():
-    file_path = 'C://Users//REUBS_LEN//PycharmProjects//RocketLanding//control_and_ai//evaluation_scripts//mpc'
+    file_path = ''
 
     k, p = 100, 10
 
