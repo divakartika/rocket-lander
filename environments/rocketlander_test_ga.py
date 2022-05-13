@@ -198,8 +198,8 @@ class RocketLander(gym.Env):
 
         # Rewards for reinforcement learning
         genes = self.settings.get('Genes')
-        reward = self.__compute_rewards(state, m_power, s_power,
-                                        part.angle)  # part angle can be used as part of the reward
+        reward, shaping_element = self.__compute_rewards(state, m_power, s_power,
+                                        part.angle, genes)  # part angle can be used as part of the reward
 
         # Check if the game is done, adjust reward based on the final state of the body
         state_reset_conditions = [
@@ -217,7 +217,7 @@ class RocketLander(gym.Env):
 
         self._update_particles()
 
-        return np.array(state), reward, done, {}  # {} = info (required by parent class)
+        return np.array(state), reward, shaping_element, done, {}  # {} = info (required by parent class)
 
     """ PROBLEM SPECIFIC - PHYSICS, STATES, REWARDS"""
 
@@ -357,6 +357,13 @@ class RocketLander(gym.Env):
                   - 1000 * abs(genes[4] * state[4]) - 30 * abs(genes[5] * state[5]) \
                   + 20 * (genes[6] * state[6]) + 20 * (genes[7] * state[7])
 
+        shaping_pos = -200 * np.sqrt(np.square(state[0]) + np.square(state[1]))
+        shaping_vel = - 100 * np.sqrt(np.square(state[2]) + np.square(state[3]))
+        shaping_ang = - 1000 * abs(state[4])
+        shaping_angvel =  - 30 * abs(state[5])
+        shaping_leftleg = + 20 * state[6]
+        shaping_rightleg = + 20 * state[7]
+
         # Introduce the concept of options by making reference markers wrt altitude and speed
         # if (state[4] < 0.052 and state[4] > -0.052):
         #     for i, (pos, speed, flag) in enumerate(zip(self.y_pos_ref, self.y_pos_speed, self.y_pos_flags)):
@@ -388,7 +395,19 @@ class RocketLander(gym.Env):
         # if self.settings['Vectorized Nozzle']:
         #     reward += -100*np.abs(nozzle_angle) # Psi
 
-        return reward / 10
+        shaping_fe = -main_engine_power * 0.3
+        shaping_fs = -side_engine_power * 0.3
+
+        shaping_element = [shaping_pos/10,
+                          shaping_vel/10,
+                          shaping_ang/10,
+                          shaping_angvel/10,
+                          shaping_leftleg/10,
+                          shaping_rightleg/10,
+                          shaping_fe/10,
+                          shaping_fs/10]
+
+        return reward / 10, shaping_element
 
     """ PROBLEM SPECIFIC - RENDERING and OBJECT CREATION"""
 
@@ -975,7 +994,7 @@ def get_state_sample(samples, genes, normal_state=True, untransformed_state=True
         f_side = np.random.uniform(-1, 1)
         psi = np.random.uniform(-90 * DEGTORAD, 90 * DEGTORAD)
         action = [f_main, f_side, psi]
-        s, r, done, info = env.step(action)
+        s, r, re, done, info = env.step(action)
         if normal_state:
             state_samples.append(s)
         else:
