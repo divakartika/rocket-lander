@@ -352,17 +352,19 @@ class RocketLander(gym.Env):
         #           - 1000 * abs(state[4]) - 30 * abs(state[5]) \
         #           + 20 * state[6] + 20 * state[7]
 
-        shaping = - 200 * np.sqrt(genes[0] * np.square(state[0]) + genes[1] * np.square(state[1])) \
-                  - 100 * np.sqrt(genes[2] * np.square(state[2]) + genes[3] * np.square(state[3])) \
-                  - 1000 * abs(genes[4] * state[4]) - 30 * abs(genes[5] * state[5]) \
-                  + 20 * (genes[6] * state[6]) + 20 * (genes[7] * state[7])
+        # shaping = - 200 * np.sqrt(genes[0] * np.square(state[0]) + genes[1] * np.square(state[1])) \
+        #           - 100 * np.sqrt(genes[2] * np.square(state[2]) + genes[3] * np.square(state[3])) \
+        #           - 1000 * abs(genes[4] * state[4]) - 30 * abs(genes[5] * state[5]) \
+        #           + 20 * (genes[6] * state[6]) + 20 * (genes[7] * state[7])
 
-        shaping_pos = -200 * np.sqrt(np.square(state[0]) + np.square(state[1]))
-        shaping_vel = - 100 * np.sqrt(np.square(state[2]) + np.square(state[3]))
-        shaping_ang = - 1000 * abs(state[4])
-        shaping_angvel =  - 30 * abs(state[5])
-        shaping_leftleg = + 20 * state[6]
-        shaping_rightleg = + 20 * state[7]
+        shaping_pos = - 200 * np.sqrt(genes[0] * np.square(state[0]) + genes[1] * np.square(state[1]))
+        shaping_vel = - 100 * np.sqrt(genes[2] * np.square(state[2]) + genes[3] * np.square(state[3]))
+        shaping_ang = - 1000 * abs(genes[4] * state[4]) 
+        shaping_angvel =  - 30 * abs(genes[5] * state[5])
+        shaping_leftleg = 20 * (genes[6] * state[6])
+        shaping_rightleg = + 20 * (genes[7] * state[7])
+
+        shaping = shaping_pos + shaping_vel + shaping_ang + shaping_angvel + shaping_leftleg + shaping_rightleg
 
         # Introduce the concept of options by making reference markers wrt altitude and speed
         # if (state[4] < 0.052 and state[4] > -0.052):
@@ -388,15 +390,19 @@ class RocketLander(gym.Env):
         # if self.settings['Side Engines']:
         #     reward += -side_engine_power * 0.3
 
-        reward += -main_engine_power * 0.3 * genes[8]
+        shaping_fe = -main_engine_power * 0.3 * genes[8]
+        shaping_fs = -side_engine_power * 0.3 * genes[9]
+
+        # reward += -main_engine_power * 0.3 * genes[8]
+        # if self.settings['Side Engines']:
+        #     reward += -side_engine_power * 0.3 * genes[9]
+
+        reward += shaping_fe
         if self.settings['Side Engines']:
-            reward += -side_engine_power * 0.3 * genes[9]
+            reward += shaping_fs
 
         # if self.settings['Vectorized Nozzle']:
         #     reward += -100*np.abs(nozzle_angle) # Psi
-
-        shaping_fe = -main_engine_power * 0.3
-        shaping_fs = -side_engine_power * 0.3
 
         shaping_element = [shaping_pos/10,
                           shaping_vel/10,
