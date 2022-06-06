@@ -904,10 +904,12 @@ class RocketLander(gym.Env):
 
     def apply_random_x_disturbance(self, epsilon, left_or_right, x_force=2000):
         if np.random.rand() < epsilon:
-            if left_or_right:
+            if left_or_right > 0:
                 self.apply_disturbance('random', x_force, 0)
-            else:
+            elif left_or_right < 0:
                 self.apply_disturbance('random', -x_force, 0)
+            else:
+                self.winds = [0, 0]
         else:
             self.winds = [0, 0]
 
