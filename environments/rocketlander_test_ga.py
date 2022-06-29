@@ -962,6 +962,7 @@ class RocketLander(gym.Env):
                     windY_force
                 ), True)
             elif isinstance(force, tuple):
+                self.winds = force
                 self.lander.ApplyForceToCenter(force, True)
 
     @staticmethod
